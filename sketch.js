@@ -11,7 +11,7 @@ let rightYPos = [];
 let spawnY;
 let scaleX;
 let scaleY;
-let vel = 3;
+let vel;
 let downCount = 0;
 let rightCount = 0;
 let upCount = 0;
@@ -27,8 +27,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(675, 575);
-  spawnY = -100;
+  createCanvas(windowWidth, windowHeight);
+  spawnY = -height/5.75;
   // downYPos.push(spawnY);
   // downCount++;
   // rightYPos.push(spawnY);
@@ -37,8 +37,9 @@ function setup() {
   // leftCount++;
   // upYPos.push(spawnY);
   // upCount++;
-  scaleX = 50;
-  scaleY = 50;
+  scaleX = width/13.5;
+  scaleY = width/13.5;
+  vel = height/191.667;
   imageMode(CENTER);
   frameRate(60);
   arrowFrames = [0.679, 0.971, 1.012, 1.2, 1.325, 1.638, 2.888, 3.18, 3.221, 3.409, 3.722, 4.035, 5.285, 5.577, 5.618, 5.806, 5.931, 6.244];
