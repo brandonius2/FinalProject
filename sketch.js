@@ -37,8 +37,8 @@ function setup() {
   // leftCount++;
   // upYPos.push(spawnY);
   // upCount++;
-  scaleX = width/13.5;
-  scaleY = width/13.5;
+  scaleX = 50;
+  scaleY = 50;
   vel = height/191.667;
   imageMode(CENTER);
   frameRate(60);
