@@ -105,7 +105,7 @@ function setup() {
   // upCount++;
   scaleX = 50;
   scaleY = 50;
-  vel = height/191.667;
+  vel = 0.3;
   imageMode(CENTER);
   frameRate(60);
   arrowFrames = [0.679, 0.971, 1.012, 1.2, 1.325, 1.638, 2.888, 3.18, 3.221, 3.409, 3.722, 4.035, 5.285, 5.577, 5.618, 5.806, 5.931, 6.244];
@@ -123,7 +123,8 @@ function setup() {
 
 function draw() {
   background(220);
-  let currentSec = millis();
+  let currentSec = millis() / 1000;
+  console.log(currentSec);
   firstArrow.render();
   secondArrow.render();
   thirdArrow.render();
@@ -152,6 +153,7 @@ function draw() {
   }
   if (arrowCount > 0){
     for (let i = 0; i < arrowCount; i++){
+      arrows[i].render();
       arrows[i].move();
     }
   }
@@ -161,23 +163,23 @@ function draw() {
 
 function keyPressed() {
   if (key == 'd') {
-    if (arrowCount > 0 && arrows[i].type == 1){      
+    if (arrowCount > 0 && arrows[0].type == 1){      
       arrows.splice(0, 1);
       arrowCount--;  
     }
     
   } else if (key == 'f') {
-     if (arrowCount > 0 && arrows[i].type == 2){      
+     if (arrowCount > 0 && arrows[0].type == 2){      
       arrows.splice(0, 1);
       arrowCount--;  
     }
   } else if (key == 'h') {
-     if (arrowCount > 0 && arrows[i].type == 3){      
+     if (arrowCount > 0 && arrows[0].type == 3){      
       arrows.splice(0, 1);
       arrowCount--;  
     }
   } else if (key == 'j') {
-     if (arrowCount > 0 && arrows[i].type == 4){      
+     if (arrowCount > 0 && arrows[0].type == 4){      
       arrows.splice(0, 1);
       arrowCount--;  
     }
@@ -206,6 +208,8 @@ function spawnDown() {
   let tempNote = new Note(2, spawnY);
   arrows.push(tempNote);
   arrowCount++;
+  console.log("arrow spawned");
+
 }
 
 function spawnRand() {
