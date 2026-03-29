@@ -78,7 +78,7 @@ class Note {
   }
 
   move(){
-    this.yPos += this.speed;
+    this.yPos += this.speed * deltaTime;
   }
   
   
