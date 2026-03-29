@@ -47,27 +47,27 @@ class Note {
   }
 
   render(){
-    if (t == 1){
+    if (this.type == 1){
       push();
       translate(this.xPos, this.yPos);
       rotate(radians(90));
       image(leftArrow, 0, 0, scaleX, scaleY);
       pop();
     }
-    else if (t == 2){
+    else if (this.type == 2){
       push();
       translate(this.xPos, this.yPos);
       image(downArrow, 0, 0, scaleX, scaleY);
       pop();
     }
-    else if (t == 3){
+    else if (this.type == 3){
       push();
       translate(this.xPos, this.yPos);
       rotate(radians(180));
       image(upArrow, 0, 0, scaleX, scaleY);
       pop();
     }
-    else if (t == 4){
+    else if (this.type == 4){
       push();
       translate(this.xPos, this.yPos);
       rotate(radians(270));
@@ -117,10 +117,10 @@ function setup() {
   secondNPos = width * 0.4;
   thirdNPos = width * 0.6;
   fourthNPos = width * 0.8;
-  firstArrow = new Note(1, width * 0.75);
-  secondArrow = new Note(2, width * 0.75);
-  thirdArrow = new Note(3, width * 0.75);
-  fourthArrow = new Note(4, width * 0.75);
+  firstArrow = new Note(1, height * 0.75);
+  secondArrow = new Note(2, height * 0.75);
+  thirdArrow = new Note(3, height * 0.75);
+  fourthArrow = new Note(4, height * 0.75);
 }
 
 function draw() {
