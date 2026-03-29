@@ -8,14 +8,11 @@ let downYPos = [];
 let leftYPos = [];
 let upYPos = [];
 let rightYPos = [];
+let arrows = [];
 let spawnY;
 let scaleX;
 let scaleY;
 let vel;
-let downCount = 0;
-let rightCount = 0;
-let upCount = 0;
-let leftCount = 0;
 let kirk;
 let firstNPos;
 let secondNPos;
@@ -25,6 +22,7 @@ let firstArrow;
 let secondArrow;
 let thirdArrow;
 let fourthArrow;
+let arrowCount = 0;
 
 class Note {
   constructor(t, y){
@@ -125,50 +123,39 @@ function setup() {
 
 function draw() {
   background(220);
+  let currentSec = millis();
   firstArrow.render();
   secondArrow.render();
   thirdArrow.render();
   fourthArrow.render();
-  if (downCount > 0) {
-    for (let i = 0; i < downCount; i++) {
-      push();
-      translate(width * 0.4, downYPos[i]);
-      image(downArrow, 0, 0, scaleX, scaleY);
-      pop();
-      downYPos[i] += vel;
+
+  if (arrowFrames.length > 0){
+    if (currentSec >= arrowFrames[0]) {
+      if (arrowTypes[0] == 1) {
+        spawnLeft();
+        arrowFrames.splice(0, 1);
+        arrowTypes.splice(0, 1);
+      } else if (arrowTypes[0] == 2) {
+        spawnDown();
+        arrowFrames.splice(0, 1);
+        arrowTypes.splice(0, 1);
+      } else if (arrowTypes[0] == 3) {
+        spawnUp();
+        arrowFrames.splice(0, 1);
+        arrowTypes.splice(0, 1);
+      } else if (arrowTypes[0] == 4) {
+        spawnRight();
+        arrowFrames.splice(0, 1);
+        arrowTypes.splice(0, 1);
+      }
     }
   }
-  if (rightCount > 0) {
-    for (let i = 0; i < rightCount; i++) {
-      push();
-      translate(width * 0.8, rightYPos[i]);
-      rotate(radians(270));
-      image(rightArrow, 0, 0, scaleX, scaleY);
-      pop();
-      rightYPos[i] += vel;
-    }
-  }
-  if (upCount > 0) {
-    for (let i = 0; i < upCount; i++) {
-      push();
-      translate(width * 0.6, upYPos[i]);
-      rotate(radians(180));
-      image(upArrow, 0, 0, scaleX, scaleY);
-      pop();
-      upYPos[i] += vel;
+  if (arrowCount > 0){
+    for (let i = 0; i < arrowCount; i++){
+      arrows[i].move();
     }
   }
 
-  if (leftCount > 0) {
-    for (let i = 0; i < leftCount; i++) {
-      push();
-      translate(width * 0.2, leftYPos[i]);
-      rotate(radians(90));
-      image(leftArrow, 0, 0, scaleX, scaleY);
-      pop();
-      leftYPos[i] += vel;
-    }
-  }
   if (arrowFrames.length > 0) {
     if (frameCount >= arrowFrames[0] * 60) {
       if (arrowTypes[0] == 1) {
@@ -217,23 +204,27 @@ function keyPressed() {
 }
 
 function spawnLeft() {
-  leftYPos.push(spawnY);
-  leftCount++;
+  let tempNote = new Note(1, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
 }
 
 function spawnRight() {
-  rightYPos.push(spawnY);
-  rightCount++;
+  let tempNote = new Note(4, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
 }
 
 function spawnUp() {
-  upYPos.push(spawnY);
-  upCount++;
+  let tempNote = new Note(3, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
 }
 
 function spawnDown() {
-  downYPos.push(spawnY);
-  downCount++;
+  let tempNote = new Note(2, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
 }
 
 function spawnRand() {
