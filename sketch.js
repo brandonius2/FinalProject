@@ -156,49 +156,30 @@ function draw() {
     }
   }
 
-  if (arrowFrames.length > 0) {
-    if (frameCount >= arrowFrames[0] * 60) {
-      if (arrowTypes[0] == 1) {
-        spawnLeft();
-        arrowFrames.splice(0, 1);
-        arrowTypes.splice(0, 1);
-      } else if (arrowTypes[0] == 2) {
-        spawnDown();
-        arrowFrames.splice(0, 1);
-        arrowTypes.splice(0, 1);
-      } else if (arrowTypes[0] == 3) {
-        spawnUp();
-        arrowFrames.splice(0, 1);
-        arrowTypes.splice(0, 1);
-      } else if (arrowTypes[0] == 4) {
-        spawnRight();
-        arrowFrames.splice(0, 1);
-        arrowTypes.splice(0, 1);
-      }
-    }
-  }
+  
 }
 
 function keyPressed() {
-  if (keyCode === DOWN_ARROW) {
-    if (downCount > 0) {
-      downYPos.splice(0, 1);
-      downCount--;
+  if (key == 'd') {
+    if (arrowCount > 0 && arrows[i].type == 1){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
-  } else if (keyCode === UP_ARROW) {
-    if (upCount > 0) {
-      upYPos.splice(0, 1);
-      upCount--;
+    
+  } else if (key == 'f') {
+     if (arrowCount > 0 && arrows[i].type == 2){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
-  } else if (keyCode === LEFT_ARROW) {
-    if (leftCount > 0) {
-      leftYPos.splice(0, 1);
-      leftCount--;
+  } else if (key == 'h') {
+     if (arrowCount > 0 && arrows[i].type == 3){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
-  } else if (keyCode === RIGHT_ARROW) {
-    if (rightCount > 0) {
-      rightYPos.splice(0, 1);
-      rightCount--;
+  } else if (key == 'j') {
+     if (arrowCount > 0 && arrows[i].type == 4){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
   }
 }
