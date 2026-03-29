@@ -41,6 +41,42 @@ class Note {
     }
     
   }
+
+  render(){
+    if (t == 1){
+      push();
+      translate(this.xPos, this.yPos);
+      rotate(radians(90));
+      image(leftArrow, 0, 0, scaleX, scaleY);
+      pop();
+    }
+    else if (t == 2){
+      push();
+      translate(this.xPos, this.yPos);
+      image(downArrow, 0, 0, scaleX, scaleY);
+      pop();
+    }
+    else if (t == 3){
+      push();
+      translate(this.xPos, this.yPos);
+      rotate(radians(180));
+      image(upArrow, 0, 0, scaleX, scaleY);
+      pop();
+    }
+    else if (t == 4){
+      push();
+      translate(this.xPos, this.yPos);
+      rotate(radians(270));
+      image(rightArrow, 0, 0, scaleX, scaleY);
+      pop();
+    }
+    
+  }
+
+  move(){
+    this.yPos += this.speed;
+  }
+  
   
 
   
