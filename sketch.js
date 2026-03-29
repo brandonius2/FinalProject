@@ -17,6 +17,34 @@ let rightCount = 0;
 let upCount = 0;
 let leftCount = 0;
 let kirk;
+let firstNPos;
+let secondNPos;
+let thirdNPos;
+let fourthNPos
+
+class Note {
+  constructor(t){
+    this.type = t;
+    this.yPos = spawnY;
+    this.speed = vel;
+    if (t == 1){
+      this.xPos = firstNPos;
+    }
+    else if (t == 2){
+      this.xPos = secondNPos;
+    }
+    else if (t == 3){
+      this.xPos = thirdNPos;
+    }
+    else if (t == 4){
+      this.xPos = fourthNPos;
+    }
+    
+  }
+  
+
+  
+}
 
 function preload() {
   downArrow = loadImage("downArrow.png");
@@ -28,7 +56,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  spawnY = -height/5.75;
+  spawnY = - (height * 0.25);
   // downYPos.push(spawnY);
   // downCount++;
   // rightYPos.push(spawnY);
@@ -45,6 +73,10 @@ function setup() {
   arrowFrames = [0.679, 0.971, 1.012, 1.2, 1.325, 1.638, 2.888, 3.18, 3.221, 3.409, 3.722, 4.035, 5.285, 5.577, 5.618, 5.806, 5.931, 6.244];
   arrowTypes = [1, 2, 1, 2, 1, 2, 2, 3, 2, 3, 2, 3, 3, 4, 3, 4, 3, 4];
   kirk.play();
+  firstNPos = width * 0.2;
+  secondNPos = width * 0.4;
+  thirdNPos = width * 0.6;
+  fourthNPos = width * 0.8;
 }
 
 function draw() {
