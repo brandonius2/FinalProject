@@ -14,6 +14,7 @@ let scaleX;
 let scaleY;
 let vel;
 let kirk;
+let testVriavle = 1;
 
 function preload() {
   downArrow = loadImage("downArrow.png");
