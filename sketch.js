@@ -8,16 +8,12 @@ let downYPos = [];
 let leftYPos = [];
 let upYPos = [];
 let rightYPos = [];
+let arrows = [];
 let spawnY;
 let scaleX;
 let scaleY;
 let vel;
-let downCount = 0;
-let rightCount = 0;
-let upCount = 0;
-let leftCount = 0;
 let kirk;
-let testVariable = 1;
 
 function preload() {
   downArrow = loadImage("downArrow.png");
@@ -29,7 +25,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  spawnY = -height/5.75;
+  spawnY = - (height * 0.25);
   // downYPos.push(spawnY);
   // downCount++;
   // rightYPos.push(spawnY);
@@ -38,79 +34,35 @@ function setup() {
   // leftCount++;
   // upYPos.push(spawnY);
   // upCount++;
-  scaleX = 50;
-  scaleY = 50;
+  scaleX = width/13.5;
+  scaleY = width/13.5;
   vel = height/191.667;
   imageMode(CENTER);
   frameRate(60);
-  arrowFrames = [0.679, 0.971, 1.012, 1.2, 1.325, 1.638, 2.888, 3.18, 3.221, 3.409, 3.722, 4.035, 5.285, 5.577, 5.618, 5.806, 5.931, 6.244];
-  arrowTypes = [1, 2, 1, 2, 1, 2, 2, 3, 2, 3, 2, 3, 3, 4, 3, 4, 3, 4];
+  arrowFrames = [13.177, 13.602, 14.266, 14.898, 16.483, 16.869, 17.301, 17.738, 18.153, 18.966, 20.662, 21.081, 21.3, 21.514, 21.95, 22.413, 22.758, 23.23, 23.597, 24.013, 24.412, 24.836, 26.853, 27.409, 28.024, 29.205, 29.618, 30.053, 30.677, 31.263, 32.511, 32.896, 33.291];
+  arrowTypes = [1, 2, 1, 2, 1, 2, 2, 3, 2, 3, 2, 3, 3, 4, 3, 4, 3, 4, 4, 2, 3, 4, 2, 3, 4, 1, 1, 2, 3, 4, 3, 2, 1];
   kirk.play();
+  firstNPos = width * 0.2;
+  secondNPos = width * 0.4;
+  thirdNPos = width * 0.6;
+  fourthNPos = width * 0.8;
+  firstArrow = new Note(1, height * 0.75);
+  secondArrow = new Note(2, height * 0.75);
+  thirdArrow = new Note(3, height * 0.75);
+  fourthArrow = new Note(4, height * 0.75);
 }
 
 function draw() {
   background(220);
-  push();
-  translate(width * 0.4, height * 0.75);
-  image(downArrow, 0, 0, scaleX, scaleY);
-  pop();
-  push();
-  translate(width * 0.8, height * 0.75);
-  rotate(radians(270));
-  image(rightArrow, 0, 0, scaleX, scaleY);
-  pop();
-  push();
-  translate(width * 0.6, height * 0.75);
-  rotate(radians(180));
-  image(upArrow, 0, 0, scaleX, scaleY);
-  pop();
-  push();
-  translate(width * 0.2, height * 0.75);
-  rotate(radians(90));
-  image(leftArrow, 0, 0, scaleX, scaleY);
-  pop();
-  if (downCount > 0) {
-    for (let i = 0; i < downCount; i++) {
-      push();
-      translate(width * 0.4, downYPos[i]);
-      image(downArrow, 0, 0, scaleX, scaleY);
-      pop();
-      downYPos[i] += vel;
-    }
-  }
-  if (rightCount > 0) {
-    for (let i = 0; i < rightCount; i++) {
-      push();
-      translate(width * 0.8, rightYPos[i]);
-      rotate(radians(270));
-      image(rightArrow, 0, 0, scaleX, scaleY);
-      pop();
-      rightYPos[i] += vel;
-    }
-  }
-  if (upCount > 0) {
-    for (let i = 0; i < upCount; i++) {
-      push();
-      translate(width * 0.6, upYPos[i]);
-      rotate(radians(180));
-      image(upArrow, 0, 0, scaleX, scaleY);
-      pop();
-      upYPos[i] += vel;
-    }
-  }
+  let currentSec = millis() / 1000;
+  console.log(currentSec);
+  firstArrow.render();
+  secondArrow.render();
+  thirdArrow.render();
+  fourthArrow.render();
 
-  if (leftCount > 0) {
-    for (let i = 0; i < leftCount; i++) {
-      push();
-      translate(width * 0.2, leftYPos[i]);
-      rotate(radians(90));
-      image(leftArrow, 0, 0, scaleX, scaleY);
-      pop();
-      leftYPos[i] += vel;
-    }
-  }
-  if (arrowFrames.length > 0) {
-    if (frameCount >= arrowFrames[0] * 60) {
+  if (arrowFrames.length > 0){
+    if (currentSec >= arrowFrames[0]) {
       if (arrowTypes[0] == 1) {
         spawnLeft();
         arrowFrames.splice(0, 1);
@@ -130,50 +82,65 @@ function draw() {
       }
     }
   }
+  if (arrowCount > 0){
+    for (let i = 0; i < arrowCount; i++){
+      arrows[i].render();
+      arrows[i].move();
+    }
+  }
+
+  
 }
 
 function keyPressed() {
-  if (keyCode === DOWN_ARROW) {
-    if (downCount > 0) {
-      downYPos.splice(0, 1);
-      downCount--;
+  if (key == 'd') {
+    if (arrowCount > 0 && arrows[0].type == 1){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
-  } else if (keyCode === UP_ARROW) {
-    if (upCount > 0) {
-      upYPos.splice(0, 1);
-      upCount--;
+    
+  } else if (key == 'f') {
+     if (arrowCount > 0 && arrows[0].type == 2){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
-  } else if (keyCode === LEFT_ARROW) {
-    if (leftCount > 0) {
-      leftYPos.splice(0, 1);
-      leftCount--;
+  } else if (key == 'h') {
+     if (arrowCount > 0 && arrows[0].type == 3){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
-  } else if (keyCode === RIGHT_ARROW) {
-    if (rightCount > 0) {
-      rightYPos.splice(0, 1);
-      rightCount--;
+  } else if (key == 'j') {
+     if (arrowCount > 0 && arrows[0].type == 4){      
+      arrows.splice(0, 1);
+      arrowCount--;  
     }
   }
 }
 
 function spawnLeft() {
-  leftYPos.push(spawnY);
-  leftCount++;
+  let tempNote = new Note(1, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
 }
 
 function spawnRight() {
-  rightYPos.push(spawnY);
-  rightCount++;
+  let tempNote = new Note(4, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
 }
 
 function spawnUp() {
-  upYPos.push(spawnY);
-  upCount++;
+  let tempNote = new Note(3, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
 }
 
 function spawnDown() {
-  downYPos.push(spawnY);
-  downCount++;
+  let tempNote = new Note(2, spawnY);
+  arrows.push(tempNote);
+  arrowCount++;
+  console.log("arrow spawned");
+
 }
 
 function spawnRand() {
