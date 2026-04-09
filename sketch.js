@@ -17,6 +17,7 @@ let rightCount = 0;
 let upCount = 0;
 let leftCount = 0;
 let kirk;
+let testVariable = 1;
 
 function preload() {
   downArrow = loadImage("downArrow.png");
@@ -37,8 +38,8 @@ function setup() {
   // leftCount++;
   // upYPos.push(spawnY);
   // upCount++;
-  scaleX = width/13.5;
-  scaleY = width/13.5;
+  scaleX = 50;
+  scaleY = 50;
   vel = height/191.667;
   imageMode(CENTER);
   frameRate(60);
